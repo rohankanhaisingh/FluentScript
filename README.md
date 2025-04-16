@@ -1,4 +1,4 @@
-# FluentScript
+# 🚀 FluentScript
 
 **FluentScript** is a programming language that blends elements of PowerShell and TypeScript. The aim of FluentScript is to make programming more readable and applicable across different technologies. By drawing inspiration from both PowerShell and TypeScript, FluentScript aims to simplify the way developers write code and interact with systems, focusing on user-friendliness and flexibility.
 
@@ -17,7 +17,7 @@ This repository will contain both example scripts and the full source code for t
 ## 🧠 Code Examples
 
 ### 📌 Generics with type constraints
-```fs
+```fls
 func Generic-Function2<T where T is boolean | int>(): T {
     if(type<T> is int) {
         return 10;
@@ -32,7 +32,7 @@ func Generic-Function2<T where T is boolean | int>(): T {
 ```
 
 ### 📌 Optional and default parameters
-```
+```fls
 func Function-WithOptionalAndDefaultParameter(default optional Param1: string) {
     if(Param1 exists) {
         return "Value: " + Param1;
@@ -43,7 +43,7 @@ func Function-WithOptionalAndDefaultParameter(default optional Param1: string) {
 ```
 
 ### 📌 Required parameters
-```fs
+```fls
 func Function-WithRequiredParameters(required Param1: string): string {
     return Param1;
 }
