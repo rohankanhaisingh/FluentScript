@@ -1,0 +1,32 @@
+import "gpio";
+
+// Function to blink the LED by switching its state between "active" and "inactive".
+func Blink-Led(required LedElement: GpioLedElement) {
+
+    // Get the current state of the LED (either "active" or "inactive").
+    var currentLedState: string = LedElement::Get-GetState;
+
+    // Simple if-statement to toggle the LED's state.
+    if(currentLedState == "active") {
+        LedElement::Set-State "inactive";  // Turn the LED off
+    } else {
+        LedElement::Set-State "active";    // Turn the LED on
+    }
+}
+
+// Main function marked as a thread to optimize performance and run infinitely.
+func<thread> Main(args: string[]) {
+
+    // Get the LED element from GPIO (assuming index 1 is the correct pin for the LED).
+    var led: GpioLedElement = Get-GpioElement -BoardIndex 1;
+
+    // Infinite loop to keep the LED blinking.
+    while(true) {
+
+        // Blink the LED by calling the function.
+        Blink-Led -LedElement led;
+
+        // Pause for 0.5 seconds to create the blink effect.
+        Set-Timeout -Seconds 0.5;
+    }
+}

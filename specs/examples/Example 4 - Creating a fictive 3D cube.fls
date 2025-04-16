@@ -1,0 +1,53 @@
+import "core:uuid";
+
+// Class to represent a 3D vector
+class Vector3 {
+    public X: int;
+    public Y: int;
+    public Z: int;
+    
+    func constructor(required X: int, required Y: int, required Z: int) {
+        ref this::{X, Y, Z};
+    }
+    
+    // Set the vector to new values
+    public func Set(Value: Vector3): Vector3 {        
+        this::X = Value::X;
+        this::Y = Value::Y;
+        this::Z = Value::Z;
+        
+        return this;
+    }
+}
+
+// Class to represent a Cube in 3D space
+class Cube {
+    declare public Id: string;
+    declare public Label: string;
+    
+    // Position and Transform are initialized as Vector3 instances
+    public Position: Vector3 = New-Instance Vector3 -X 0 -Y 0 -Z 0;
+    public Transform: Vector3 = New-Instance Vector3 -X 1 -Y 1 -Z 1;
+    
+    // Constructor to initialize a Cube with Id and Label
+    func constructor(required Id: string, required Label: string) {
+        this::Id = Id;
+        this::Label = Label;
+    }
+}
+
+func<runtime> Main(args: string[]) {
+
+    // Creating a new Cube with a unique ID and label
+    var cubeId: string = New-UUID -Type "v4";  // Generate UUID first
+    var cube = New-Instance Cube -Id cubeId -Label "My Cube";
+    
+    // Setting new position and transformation for the cube
+    cube::Position::Set -Value (New-Instance Vector3 -X 2 -Y 2 -Z 2);
+    cube::Transform::Set -Value (New-Instance Vector3 -X 5 -Y 5 -Z 5);
+    
+    // Optionally, display the cube's properties
+    Write-Host "Cube created with ID: " + cube::Id;
+    Write-Host "Position: " + cube::Position::X + ", " + cube::Position::Y + ", " + cube::Position::Z;
+    Write-Host "Transform: " + cube::Transform::X + ", " + cube::Transform::Y + ", " + cube::Transform::Z;
+}

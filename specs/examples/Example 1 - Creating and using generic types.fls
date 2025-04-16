@@ -1,0 +1,76 @@
+// Function that always returns a boolean.
+func Generic-Function1<T where T is boolean>(): T {
+    return true;
+}
+
+// Function that allows only int and boolean as return type.
+func Generic-Function2<T where T is boolean | int>(): T {
+    if(type<T> is int) {
+        return 10;
+    }
+
+    if(type<T> is boolean) {
+        return true;
+    }
+
+    // Optional fallback to prevent compile error.
+    throw "Unhandled type in Generic-Function2: " + type<T>;
+}
+
+// This will cause a compile error, as the return type "" is not valid.
+func Generic-Function3<T where T is boolean | int>(): T {
+    // Error: Return type does not match constraint
+    return ""; // ❌ 'string' is not in the constraint list.
+}
+
+// This will also cause a compile error due to missing return value.
+func Generic-Function4<T where T is boolean>(): T {
+    // Error: Missing return for type boolean.
+    return; // ❌ Invalid return for boolean function.
+}
+
+// Function that returns string or int depending on the generic type.
+func Return-StringOrNumber<T where T is string | int>(): T {
+    if(type<T> is string) {
+        return "Hello world!";
+    }
+
+    if(type<T> is int) {
+        return 20;
+    }
+
+    return "Hello world!";
+}
+
+func Main(args: string[]) {
+
+    // ✅ Valid: returns boolean
+    var a: boolean = Generic-Function1;
+
+    // ❌ Error: string not allowed for this generic
+    var b: string = Generic-Function1<string>;
+
+    // ✅ Valid: no generic specified, default selected (inferred as boolean)
+    var c: boolean = Generic-Function2;
+
+    // ✅ Valid: returns int
+    var d: int = Generic-Function2<int>;
+
+    // ✅ Valid: returns boolean
+    var e: boolean = Generic-Function2<boolean>;
+
+    // ❌ Error: string not allowed
+    var f: string = Generic-Function2<string>;
+
+    // ✅ Default return if not matched: fallback throws error or returns last
+    var g: string = Return-StringOrNumber;
+
+    // ✅ Explicit string return
+    var h: string = Return-StringOrNumber<string>;
+
+    // ✅ Explicit int return
+    var i: int = Return-StringOrNumber<int>;
+
+    // ❌ Error: boolean not allowed
+    var j: boolean = Return-StringOrNumber<boolean>;
+}

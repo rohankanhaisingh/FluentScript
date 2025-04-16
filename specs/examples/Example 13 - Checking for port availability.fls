@@ -1,0 +1,26 @@
+import "core:system";
+
+func Get-PortAvailability<T where T is boolean or Process>(required Port: int): T | null {
+
+    var connection: TcpConnection = Get-NetTcpConnection -LocalPort Port;
+    var process: Process = Get-Process -Id connection::Id;
+
+    if(connection == null) {
+        return null;
+    }
+
+    if(type<T> == boolean) {
+        return connection::Code = "EADDRINUSE" ? false : true;
+    }
+
+    return process;
+}
+
+func Main(args: string[]) {
+
+    var a: boolean = Get-PortAvailability<boolean> -Port 8080;
+    
+    var b: Process = Get-PortAvailability<Process> -Port 8080;
+
+    var c: Process = Get-PortAvailability -Port 8080;
+}

@@ -1,0 +1,27 @@
+// Function to be run as a background thread.
+func<thread> ThreadFunction1(required event: ThreadEvent) {
+    
+    // This can be any long-running task you want to perform in the background.
+    Write-Host "This function is running in the background, in a different thread apart from the main one.";
+    
+    // Simulate some background task
+    Set-Timeout -Seconds 5; // Let the background thread "work" for 5 seconds
+    Write-Host "Background task completed after 5 seconds.";
+}
+
+func Main(args: string[]) {
+
+    // Create a new thread instance, and apply the 'ThreadFunction1' function as function to be executed.
+    var thread1: Thread = New-Instance Thread -Function ThreadFunction1;
+
+    // Start the thread, apart from the main thread.
+    thread1::Start-Thread;
+
+    // Optionally, wait for a while and then stop the thread if needed.
+    Set-Timeout -Seconds 3;
+    
+    // Stop the thread, which will have no effect on the main thread.
+    thread1::Stop-Thread;
+
+    Write-Host "Main thread continues running independently of the background thread.";
+}

@@ -1,0 +1,13 @@
+// Function to calculate the sum of two integers
+func CalculateSum(required Sum1: int, required Sum2: int): int {
+    return Sum1 + Sum2;
+}
+
+func<runtime> Main(args: string[]) {
+
+    // Calculating the sum of 10 and 42
+    var calculatedSum: int = CalculateSum -Sum1 10 -Sum2 42;
+    
+    // Optionally: Printing the result
+    Write-Host "The calculated sum is: " + calculatedSum;
+}

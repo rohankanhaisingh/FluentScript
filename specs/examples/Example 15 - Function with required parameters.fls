@@ -1,0 +1,50 @@
+func Function-WithRequiredParameters(required Param1: string): string {
+    return Param1;
+}
+
+func Function-WithMoreRequiredParameters(required Param1: string, required Param2: string): string {
+    return Param1 + " - " + Param2;
+}
+
+func Function-WithDefaultAndRequiredParameters(default required Param1: string, required Param2: string) {
+    return Param1 + " - " + Param2;
+}
+
+func Main(args: string[]) {
+
+    // This will return "John Doe".
+    var a: string = Function-WithRequiredParameters -Param1 "John Doe";
+
+    // This will cause an error because no value to Param1 has been given.
+    var b: string = Function-WithRequiredParameters;
+
+    // This will cause an error because "Param1" has not been defined as a default parameter.
+    var c: string = Function-WithRequiredParameters "John Doe";
+
+    // This will cause an error because "Param2" has not been defined as parameter.
+    var d: string = Function-WithRequiredParameters -Param1 "John Doe" -Param2 "Albertus Gerardus";
+
+    // This will return "John Doe - Albertus Geradus".
+    var e: string = Function-WithMoreRequiredParameters -Param1 "John Doe" -Param2 "Albertus Gerardus";
+
+    // This will return "John Doe - Albertus Geradus", the order of the parameters doesn't matter.
+    var f: string = Function-WithMoreRequiredParameters -Param2 "John Doe" -Param1 "Albertus Gerardus";
+
+    // This will cause an error because no value has been given to "Param2".
+    var g: string = Function-WithMoreRequiredParameters -Param1 "John Doe";
+
+    // This will cause an error because "Param3" has not been defined as parameter.
+    var h: string = Function-WithMoreRequiredParameters -Param1 "John Doe" -Param2 "Albertus Gerardus" -Param3 "Frederick Benus";
+
+    // This will return "John Doe - Albertus Geradus".
+    var i: string = Function-WithDefaultAndRequiredParameters "John Doe" -Param2 "Albertus Gerardus";
+
+    // This will return "John Doe - Albertus Geradus".
+    var j: string = Function-WithDefaultAndRequiredParameters -Param1 "John Doe" -Param2 "Albertus Gerardus";
+
+    // This will cause an error because no default value has been given as parameter.
+    var k: string = Function-WithDefaultAndRequiredParameters -Param2 "Albertus Gerardus";
+
+    // This will cause an error because "Param3" has not been defined as parameter.
+    var l: string = Function-WithDefaultAndRequiredParameters "John Doe" -Param2 "Albertus Gerardus" -Param3;
+}

@@ -1,0 +1,20 @@
+import "core:fsx";
+
+export class App extends FunctionalComponent {
+
+    dynamic var counter: int = 0;
+
+    private func IncrementCounter() {
+        this::counter += 1;
+    }
+
+    override func Render() {
+        return (
+            <div>
+                <h1>Dynamic application using FSX.</h1>
+                <p>Count: {this::counter}</p>
+                <button onClick={this::Increment}>Add number</button>
+            </div>
+        );
+    }
+}

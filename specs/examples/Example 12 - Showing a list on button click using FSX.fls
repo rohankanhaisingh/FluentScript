@@ -1,0 +1,60 @@
+import "core:fsx";
+
+class List extends FunctionalComponent {
+    
+    dynamic var listItems: Collection<string> = New-Instance [
+        "Butter",
+        "Bread",
+        "Eggs",
+        "Wheat",
+        "Milk"
+    ];
+
+    override func Render() { 
+        return (
+            <ul>
+                {loop(item in this::listItems) {
+                    <li>{item}</li>
+                }}
+            </ul>
+        );
+    }
+}
+
+class App extends FunctionalComponent {
+    
+    dynamic var isShowingList: boolean = false;
+
+    private func HandleButtonClick(required event: ButtonOnClickEvent) {
+
+        if(this::isShowingList == true) {
+            this::isShowingList = false;
+        } else {
+            this::isShowingList = true;
+        }
+    }
+
+    override func Render() {
+        return (
+            <ParentialWrapper>
+                <button onClick={this::HandleButtonClick}>
+                    <span>{this::isShowingList ? "Hide list" : "Show list"}</span>
+                </button>
+
+                {if(this::isShowingList == true) {
+                    <List />
+                }}
+            </ParentialWrapper>
+        );
+    }
+}
+
+func<runtime> Main(args: string[]) {
+
+    var container: HTMLElement = Get-ElementById "root";
+    var root: FunctionalRootContainer = New-RootContainer -Container container;
+
+    root::Render func() {
+        return <App />;
+    }
+}

@@ -1,0 +1,33 @@
+class Person {
+    
+    declare public Name: string;
+    declare public Age: int;
+    
+    // Constructor to initialize Name and Age
+    func constructor(required Name: string, required Age: int) {
+        this::{Name, Age}; // No need for 'ref' here for assignment
+    }
+    
+    // Method to greet using a template text
+    public func Greet(required TemplateText: string): void {
+        Write-Host TemplateText + " " + this::Name;
+    }
+    
+    // Method to change the Age of the person
+    public func ChangeAge(required Age: int): void {
+        this::Age = Age; // No need for return as it modifies the state directly
+    }
+}
+
+func<runtime> Main(args: string[]) {
+
+    // Creating a new instance of Person
+    var person = New-Instance Person -Name "Rohan" -Age 20;
+    
+    // Call Greet method with a greeting message
+    person::Greet -TemplateText "Hello there";
+
+    // Change Age of the person and call the Greet method again
+    person::ChangeAge -Age 21;
+    person::Greet -TemplateText "Updated age of";
+}

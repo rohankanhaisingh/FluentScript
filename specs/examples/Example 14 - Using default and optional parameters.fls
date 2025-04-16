@@ -1,0 +1,55 @@
+func Function-WithOptionalParameter(optional Param1: string): string {
+    if(Param1 exists) {
+        return "Value of Param1: " + Param1;
+    } else {
+        return "No value given as parameter";
+    }
+}
+
+func Function-WithDefaultParameter(default Param1: string) {
+    return "Value of Param1: " + Param1;
+}
+
+func Function-WithOptionalAndDefaultParameter(default optional Param1: string) {
+    if(Param1 exists) {
+        return "Value of Param1: " + Param1;
+    } else {
+        return "No value given as parameter";
+    }
+}
+
+func Main(args: string[]) {
+
+    // Will return "Value of Param1: John Doe".
+    var a: string = Function-WithOptionalParameter -Param1 "John Doe";
+
+    // Will return "No value given as paramater".
+    var b: string = Function-WithOptionalParameter;
+
+    // Will cause an error because "Param2" is not a parameter defined in the function.
+    var c: string = Function-WithOptionalParameter -Param2 "John Doe";
+
+    // Will return "Value of Param1: John Doe".
+    var d: string = Function-WithDefaultParameter "John Doe";
+
+    // Will return "Value of Param1: John Doe".
+    var e: string = Function-WithDefaultParameter -Param1 "John Doe";
+
+    // Will cause an error because "Param2" is not a parameter defined in the function.
+    var f: string = Function-WithDefaultParameter -Param2 "John Doe";
+    
+    // Will cause an error because a value as parameter is required.
+    var g: string = Function-WithDefaultParameter;
+
+    // Will return "No value given as parameter".
+    var h: string = Function-WithOptionalAndDefaultParameter;
+
+    // Will return "Value of Param1: John Doe".
+    var i: string = Function-WithOptionalAndDefaultParameter "John Doe";
+
+    // Will return "Value of Param1: John Doe".
+    var j: string = Function-WithOptionalAndDefaultParameter -Param1 "John doe";
+
+    // Will cause an error because "Param2" is not a parameter defined in the function.
+    var k: string = Function-WithOptionalAndDefaultParameter -Param2 "John Doe";
+}

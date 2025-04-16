@@ -1,0 +1,15 @@
+import "core:fsx";
+
+import { App } from "./Example 10 - Creating web components using FSX";
+
+func Main(args: string[]) {
+
+    var container = Get-ElementById "root";
+    var root = New-RootElement -Container container;
+
+    root::Render func() {
+        return (
+            <App />
+        );
+    }
+}

@@ -1,0 +1,47 @@
+import "core:http";
+
+// The main function is async, meaning it will run asynchronously.
+// It won't block the rest of the code execution.
+func<async> Main(args: string[]): void {
+    
+    // Declaring test post data.
+    var postData = {
+        name: "Rohan",
+        age: 20,
+        gender: "male"
+    };
+    
+    // Create a new HTTP request instance.
+    var request: HttpRequest = New-Instance HttpRequest -Url "http://api.com/api";
+
+    // Set the HTTP request method to POST.
+    request::Set-RequestMethod "POST";
+
+    // Set important headers including content type and content length.
+    request::Set-Headers -ContentType "application/json" -ContentLength (Get-BufferByteLength -FromObject postData);
+    
+    // Set the request body to be sent in JSON format.
+    request::Set-Body -Data postData -DataType "json";
+
+    try {
+        // Start the request asynchronously and wait for the response.
+        var response: HttpResponse = await request::Start-Request;
+
+        // Get the response status code.
+        var responseStatusCode: int = response::Get-ResponseStatusCode;
+
+        // If status code is not 200 (OK), throw an error with the status code.
+        if(responseStatusCode !== 200) {
+            throw "Error: Response code " + responseStatusCode;
+        }
+
+        // Resolve the response data from the buffer and convert it to a JSON object.
+        var responseData = response::Resolve-Data -DataType "json";
+
+        // Output the response data.
+        Write-Host responseData;
+    } catch (error) {
+        // Catch any errors (e.g. network issues) and display a message.
+        Write-Host "Request failed with error: " + error;
+    }
+}

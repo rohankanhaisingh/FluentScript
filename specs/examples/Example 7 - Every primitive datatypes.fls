@@ -1,0 +1,21 @@
+func Main(args: string[]) {
+    
+    var name: string = "John";
+    var singleCharacter: char = "a";
+    
+    var roundedNumber: int = 13;
+    var floatingNumber: float = 0.53;
+    var numberWithManyDecimals: double = 0.0483985;
+    var veryLongNumber: long = 29389021874901489029;
+    var numberBetween0And255: byte = 52;
+
+    var isTrue: boolean = true;
+    var isFalse: boolean = false;
+    
+    var nullType: null = null;
+    
+    var unknownType1: unknown = 32;
+    var unknownType2: unknown = "This is a text";
+    var unknownType3: unknown = true;
+    var unknownType4: unknown = null;
+}
