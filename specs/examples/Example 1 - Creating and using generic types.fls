@@ -4,7 +4,7 @@ func Generic-Function1<T where T is boolean>(): T {
 }
 
 // Function that allows only int and boolean as return type.
-func Generic-Function2<T where T is boolean | int>(): T {
+func Generic-Function2<T where T is boolean or int>(): T {
     if(type<T> is int) {
         return 10;
     }
@@ -18,7 +18,7 @@ func Generic-Function2<T where T is boolean | int>(): T {
 }
 
 // This will cause a compile error, as the return type "" is not valid.
-func Generic-Function3<T where T is boolean | int>(): T {
+func Generic-Function3<T where T is boolean or int>(): T {
     // Error: Return type does not match constraint
     return ""; // ❌ 'string' is not in the constraint list.
 }
@@ -30,7 +30,7 @@ func Generic-Function4<T where T is boolean>(): T {
 }
 
 // Function that returns string or int depending on the generic type.
-func Return-StringOrNumber<T where T is string | int>(): T {
+func Return-StringOrNumber<T where T is string or int>(): T {
     if(type<T> is string) {
         return "Hello world!";
     }

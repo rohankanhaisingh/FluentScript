@@ -1,0 +1,32 @@
+// Declare the name of the module, in this case 'my-custom-module'.
+// This module will then be imported using the name of the module.
+declare module "my-custom-module";
+
+// There are several function fields: private, public, override, global.
+
+// This function has a global field, which means that this function 
+// doesn't have to imported specifically.
+global func Say-HiUsingGlobalFunction(required Name: string): string {
+    return "Hello " + Name;
+}
+
+// This function has a public field, which means that this function
+// has to be imported specifically in order to be used, and is not part
+// of the global scope of this module.
+public func Say-HiUsingPublicFunction(required Name: string): string {
+    return "Hello " + Name;
+}
+
+// This function has a private field, which means that this function
+// cannot be used outside the scope of this module. It can only be 
+// used within.
+private func Say-HiUsingPrivateFunction(required Name: string): string {
+    return "Hello " + Name;
+}
+
+// This function has no fields, which will automatically be
+// marked as a private function that cannot be used outside the
+// scope of this module, only within.
+func Say-HiUsingNoFieldFunction(required Name: string): string) {
+    return "Hello " + Name;
+}

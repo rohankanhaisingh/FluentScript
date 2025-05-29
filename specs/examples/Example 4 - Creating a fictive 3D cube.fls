@@ -11,7 +11,7 @@ class Vector3 {
     }
     
     // Set the vector to new values
-    public func Set(Value: Vector3): Vector3 {        
+    public func Set(required Value: Vector3): Vector3 {        
         this::X = Value::X;
         this::Y = Value::Y;
         this::Z = Value::Z;
@@ -33,6 +33,19 @@ class Cube {
     func constructor(required Id: string, required Label: string) {
         this::Id = Id;
         this::Label = Label;
+    }
+}
+
+class World {
+
+    public Cubes: Collection<Cube> = New-Instance Collection<Cube> -MaxLength 10;
+    
+    func constructor() {
+
+    }
+
+    public func AddCube(required Cube: Cube) {
+
     }
 }
 

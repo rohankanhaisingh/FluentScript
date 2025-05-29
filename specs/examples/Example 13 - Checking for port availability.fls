@@ -1,6 +1,6 @@
 import "core:system";
 
-func Get-PortAvailability<T where T is boolean or Process>(required Port: int): T | null {
+func Get-PortAvailability<T where T is boolean or Process>(optional required _port: int, optional required Port: int): T | null {
 
     var connection: TcpConnection = Get-NetTcpConnection -LocalPort Port;
     var process: Process = Get-Process -Id connection::Id;

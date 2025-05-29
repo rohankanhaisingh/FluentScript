@@ -1,0 +1,28 @@
+import "discord-fls";
+
+func Main(args: string[]) {
+
+    var client: Client = New-Instance Client
+        -Intents [
+            GatewayIntentBits::Guilds,
+            GatewayIntentBits::GuildMessages,
+            GatewayIntentBits::MessageContent
+        ];
+
+    client::Set-EventListener "ready" -Callback func() {
+        Write-Host "Succesfully logged in.";
+    }
+
+    client::Set-EventListener "message-create" -Callback func(default message: Message) {
+        
+        if(message::author::isBot == true) return;
+
+        var content: string = message::content;
+        
+        if(content === "!ping") {
+            return message::Reply "Pong!";
+        }
+    }
+
+    client::Login args[0];
+}
