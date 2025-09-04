@@ -26,3 +26,10 @@ const inputFiles: string[] = process.argv.filter(function (arg: string) {
 
 info(InbuiltMessageCodes.INFO_INPUT_FILES_FOUND, `Found ${inputFiles.length} input file(s).`);
 info(InbuiltMessageCodes.INFO_PREPARING_TO_INTREPET_FILES, "Preparing to interpret the input file(s).");
+
+inputFiles.forEach(function (filePath: string) {
+
+	// Check if the file is allowed to read
+	const fileContents: string = fs.readFileSync(filePath, "utf-8");
+
+});
