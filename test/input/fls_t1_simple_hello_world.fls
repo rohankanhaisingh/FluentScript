@@ -1,0 +1,6 @@
+func Main(args: string[]): void {
+
+	Console-WriteLine "Hello World!" -TextColor "white" -BackgroundColor "black";
+
+	return;
+}
