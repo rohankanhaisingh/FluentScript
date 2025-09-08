@@ -1,0 +1,27 @@
+[
+  {
+    "name": "Function",
+    "description": "A reserved keyword to declare a function in JavaScript. Functions are reusable blocks of code that can be called with specific arguments to perform a task or calculate a value. They can be defined using the `function` keyword, followed by the function name, parentheses for parameters, and curly braces for the function body. Functions can also be assigned to variables, passed as arguments to other functions, and returned from functions.",
+    "keyword": "func"
+  },
+  {
+    "name": "Variable",
+    "description": "A reserved keyword to define a variable",
+    "keyword": "var"
+  },
+  {
+    "name": "If-statement",
+    "description": "A reserved keyword to create a conditional statement that executes a block of code if a specified condition is true. It can be followed by an optional `else` block to execute code if the condition is false, and can also include multiple `else if` blocks to check additional conditions.",
+    "keyword": "if"
+  },
+  {
+    "name": "Else-statement",
+    "description": "A reserved keyword to create a conditional statement that executes a block of code if the preceding `if` condition is false. It can be used in conjunction with `if` and `else if` statements to provide alternative code paths based on different conditions.",
+    "keyword": "else"
+  },
+  {
+    "name": "Return",
+    "description": "A reserverd keyword to return something from a function.",
+    "keyword": "return"
+  }
+]

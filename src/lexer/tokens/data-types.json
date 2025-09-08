@@ -1,0 +1,37 @@
+[
+  {
+    "name": "String",
+    "description": "An inbuilt data-type that describes a string.",
+    "keyword": "string"
+  },
+  {
+    "name": "Character",
+    "description": "An inbuilt datatype that describes a character.",
+    "keyword": "char"
+  },
+  {
+    "name": "Integer",
+    "description": "An inbuilt datatype that specifies an integer.",
+    "keyword": "int"
+  },
+  {
+    "name": "Float",
+    "description": "An inbuilt datatype that specifies a float.",
+    "keyword": "float"
+  },
+  {
+    "name": "Double",
+    "description": "An inbuilt datatype that specifies a double.",
+    "keyword": "double"
+  },
+  {
+    "name": "Byte",
+    "description": "An inbuilt datatype that specifies a byte.",
+    "keyword": "byte"
+  },
+  {
+    "name": "Boolean",
+    "description": "An inbuilt datatype that specifies a boolean.",
+    "keyword": "boolean"
+  }
+]
