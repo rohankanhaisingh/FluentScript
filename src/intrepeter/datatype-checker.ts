@@ -1,6 +1,4 @@
-import { PrimitiveDataTypes } from "../types";
-
-export function checkPrimitiveDataType(value: any, primitiveDataType: PrimitiveDataTypes) {
+export function checkPrimitiveDataType(value: any, primitiveDataType: string) {
 
 	switch (primitiveDataType) {
 		case "string": return typeof value === "string";

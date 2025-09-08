@@ -1,0 +1,16 @@
+import "gpio";
+
+func Main(args: string[]): void {
+
+	var led: GpioLedElement = Get-GpioElement -Pin 1 -Type "Led";
+	var button: GpioButtonElement = Get-GpioElement -Pint 2 -Type "Button";
+
+	button::AddEventListener "pressed" -Callback func(event: GpioButtonEvent) {
+		
+		if(led::active === true) {
+			led::TurnOff();
+		} else {
+			led::TurnOn();
+		}
+	}
+}

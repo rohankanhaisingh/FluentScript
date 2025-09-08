@@ -1,1 +1,1 @@
-{"root":["./app.ts","./types.ts","./intrepeter/datatype-checker.ts","./utils/constants.ts","./utils/logger.ts","./utils/message-codes.ts"],"version":"5.9.2"}
+{"root":["./app.ts","./types.ts","./intrepeter/datatype-checker.ts","./lexer/tokenizer.ts","./lexer/testers/test-comment-case.ts","./lexer/testers/test-identifier-part.ts","./lexer/testers/test-identifier-start.ts","./lexer/testers/test-number-case.ts","./lexer/testers/test-string-case.ts","./lexer/testers/test-whitespace-case.ts","./utils/constants.ts","./utils/logger.ts","./utils/message-codes.ts"],"version":"5.9.2"}

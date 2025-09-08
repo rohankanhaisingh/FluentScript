@@ -7,6 +7,8 @@ import { ROOT_PROJECT_PATH } from "./utils/constants";
 import { warn, info } from "./utils/logger";
 import { InbuiltMessageCodes } from "./utils/message-codes";
 
+import { tokenize } from "./lexer/tokenizer";
+
 colors.enable();
 dotenv.config({ path: path.join(ROOT_PROJECT_PATH, ".env"), quiet: true });
 
@@ -32,4 +34,5 @@ inputFiles.forEach(function (filePath: string) {
 	// Check if the file is allowed to read
 	const fileContents: string = fs.readFileSync(filePath, "utf-8");
 
+	tokenize(fileContents);
 });

@@ -1,6 +1,11 @@
 func Main(args: string[]): void {
+	
+	var a: int = 6;
+	var b: int = 7;
 
-	Console-WriteLine "Hello World!" -TextColor "white" -BackgroundColor "black";
+	var sum: int = a + b;
+
+	Console-Log "Hello world!" -TextColor "White";
 
 	return;
 }
