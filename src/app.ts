@@ -8,6 +8,7 @@ import { warn, info } from "./utils/logger";
 import { InbuiltMessageCodes } from "./utils/message-codes";
 
 import { tokenize } from "./lexer/tokenizer";
+import { initialize } from "./parser/parser";
 
 import { Token } from "./types";
 
@@ -37,6 +38,7 @@ inputFiles.forEach(function (filePath: string) {
 	const fileContents: string = fs.readFileSync(filePath, "utf-8");
 
 	const tokens: Token[] = tokenize(fileContents);
+	const parser = initialize(tokens);
 
 	console.log(tokens);
 });
