@@ -53,7 +53,6 @@ export type Statement =
 	| { type: "ExpressionStatement"; expr: Expression }
 	| { type: "ReturnStatement"; value?: Expression };
 
-
 export type Expression =
   | { type: "NumberLiteral"; value: number }
   | { type: "StringLiteral"; value: string }

@@ -19,7 +19,12 @@ export function warn(messageCode: InbuiltMessageCodes, message: string) {
 
 export function info(messageCode: InbuiltMessageCodes, message: string) {
 
-	warningLogCount += 1;
-
 	return console.log(formatDate() + `Info `.white + `[${messageCode}]`.blue + ": ".grey + message.gray);
+}
+
+export function error(messageCode: InbuiltMessageCodes, message: string) {
+
+	errorLogCount += 1;
+
+	return console.log(formatDate() + `(${errorLogCount}) Error `.red + `[${messageCode}]`.blue + ": ".grey + message.white);
 }

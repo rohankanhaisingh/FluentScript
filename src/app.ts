@@ -39,6 +39,4 @@ inputFiles.forEach(function (filePath: string) {
 
 	const tokens: Token[] = tokenize(fileContents);
 	const parser = initialize(tokens);
-
-	console.log(tokens);
 });

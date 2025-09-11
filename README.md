@@ -61,8 +61,8 @@ The FluentScript parser is written in TypeScript. It processes .fls files by:
 ## Roadmap
 
 - ✔️ Creating examples to showcase the language features
-- ◻️ Initial parser implementation
-- ◻️ Parser with AST generation
+- ✔️ Initial parser implementation
+- ✔️ Parser with AST generation
 - ◻️ Type system with generics and constraints
 - ◻️ Parameter keywords (optional, default, required)
 - ◻️ Runtime interpreter or JS transpiler
