@@ -1,0 +1,52 @@
+import "fluexgl";
+import "dom";
+
+func<thread, async> Main(default required args: string[]) {
+
+    var screenWidth: int = Get-ScreenSize -Width;
+    var screenHeight: int = Get-ScreenSize -Height;
+
+    var renderer: WebGPURenderer = New-Instance WebGPURenderer
+        -MsaaSampleCount 4
+        -PowerPreference "high-power"
+        -AntiAliasing;
+
+    var scene: WebGPURendererScene = New-Instance WebGPURendererScene
+        -Renderer renderer as WebGPURenderer;
+
+    var camera: PerspectiveCamera = New-Instance PerspectiveCamera
+        -Perspective screenWidth / screenHeight;
+
+    var thrd: Thread = New-Instance Thread;
+
+    renderer::Set-CanvasSizeRelativeToWindow
+        -Margin 0
+        -AutoUpdate;
+
+    renderer::Append-CanvasToElement Get-Element ".scene-wrapper" as HTMLDivElement;
+
+    await renderer::Initialize;
+
+    var triangle: SimpleTriangle = New-Instance SimpleTriangle;
+
+    scene::Add-Renderable triangle;
+
+    await scene::Prepare camera;
+
+    thrd::Add-EventListener 
+        -EventName "update" 
+        -Callback func(default required event: ThreadOnUpdateEvent | Event) {
+            
+            try {
+
+                renderer::Render
+                    -Camera camera
+                    -Scene scene;
+            } catch(e: Exception) {
+
+                thrd::Stop;
+                Write-Host e;
+            }
+        }
+
+}
