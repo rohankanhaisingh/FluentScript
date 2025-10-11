@@ -2,9 +2,9 @@ import "core:uuid";
 
 // Class to represent a 3D vector
 class Vector3 {
-    public X: int;
-    public Y: int;
-    public Z: int;
+    declare public X: int;
+    declare public Y: int;
+    declare public Z: int;
     
     func constructor(required X: int, required Y: int, required Z: int) {
         ref this::{X, Y, Z};

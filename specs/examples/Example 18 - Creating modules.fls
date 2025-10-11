@@ -6,21 +6,21 @@ declare module "my-custom-module";
 
 // This function has a global field, which means that this function 
 // doesn't have to imported specifically.
-global func Say-HiUsingGlobalFunction(required Name: string): string {
+func<global> Say-HiUsingGlobalFunction(required Name: string): string {
     return "Hello " + Name;
 }
 
 // This function has a public field, which means that this function
 // has to be imported specifically in order to be used, and is not part
 // of the global scope of this module.
-public func Say-HiUsingPublicFunction(required Name: string): string {
+func<public> Say-HiUsingPublicFunction(required Name: string): string {
     return "Hello " + Name;
 }
 
 // This function has a private field, which means that this function
 // cannot be used outside the scope of this module. It can only be 
 // used within.
-private func Say-HiUsingPrivateFunction(required Name: string): string {
+func<private> Say-HiUsingPrivateFunction(required Name: string): string {
     return "Hello " + Name;
 }
 
