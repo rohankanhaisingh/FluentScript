@@ -1,0 +1,45 @@
+import "core:path";
+import "core:file-system";
+import "core:processes";
+
+global struct WatchWorkletChangesFunctionStructure {
+    required position(0) SourceDirectory: string;
+    required position(1) DestinationPath: string;
+    required position(2) WasmFilePath: string;
+    required position(3) WebpackProjectDirectory: string;
+}
+
+global func Watch-WorkletChanges(args: struct<WatchWorkletChangesFunctionStructure>) {
+
+    var { SourceDirectory, DestinationPath, WasmFilePath, WebpackProjectDirectory } = args;
+
+    var pathsExists: boolean = (
+        Path::Test-Path SourceDirectory ||
+        Path::Test-Path DestinationPath ||
+        Path::Test-Path WasmFilePath
+    )
+
+    if(!pathsExists) 
+        throw "Cannot watch for file changes because one or more specified folders (or files) do not exist.";
+
+    const sourceFiles: string[] = File::Get-Files
+        -Pattern "**/*.ts"
+        -CurrentWorkDirectory SourceDirectory;
+
+    loop file in sourceFiles {
+        File::Set-FileWatcher -Target file -Interval 100 -OnChange func(current: File::Stats, previous: File::Stats) {
+            if(current::mtimeMs !== previous::mtimeMs) {
+                Start-BuildingPipeline;
+            }
+        }
+    }
+}
+
+async func Start-BuildingPipeline() {
+
+    const start: int = Date::Get-CurrentTime;
+    
+    Process::Start-Process -Command "npx webpack --config webpack.config.js" -CurrentWorkDirectory WebpackProjectDirectory;
+
+    
+}
